@@ -26,9 +26,12 @@ extension Action {
                 return .failure(SolanaError.invalidPublicKey)
             }
 
-            guard let fromPublicKey = PublicKey(string: fromPublicKey) else {
+            guard let fromPublicKey = PublicKey(string: fromPublicKey),
+                  let mintPublicKey = PublicKey(string: mintAddress),
+                case let .success(fromPublicKey) = PublicKey.associatedTokenAddress(walletAddress: fromPublicKey, tokenMintAddress: mintPublicKey) else {
                 return .failure( SolanaError.invalidPublicKey)
             }
+
             var instructions = [TransactionInstruction]()
 
             // create associated token address
