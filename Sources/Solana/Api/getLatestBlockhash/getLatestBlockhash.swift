@@ -43,7 +43,7 @@ extension Api {
 }
 
 extension ApiTemplates {
-    public struct getLatestBlockhash: ApiTemplate {
+    public struct GetLatestBlockhash: ApiTemplate {
         public init(commitment: Commitment? = nil) {
             self.commitment = commitment
         }
